@@ -49,8 +49,14 @@ func main() {
 	// Set up Gin
 	r := gin.Default()
 
+	// // CORS configuration
+	// r.Use(cors.Default())
+
 	// CORS configuration
-	r.Use(cors.Default())
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"} // Replace with your desired origin
+	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE"}
+	r.Use(cors.New(config))
 
 	// Routes
 	r.POST("/login", login)
